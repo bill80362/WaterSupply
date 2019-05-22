@@ -1,4 +1,5 @@
 import InsertData from "./components/InsertData";
+import UpdateData from "./components/UpdateData";
 import ChartTime from "./components/ChartTime";
 import ChartStation from "./components/ChartStation";
 import ListData from "./components/ListData";
@@ -42,6 +43,7 @@ function App() {
             <Route exact path="/ChartTime" component={ChartTime} />
             <Route path="/ListData" component={ListData} />
             <Route path="/InsertData" component={InsertData} />
+            <Route path="/ListData/:id" component={UpdateData} />
           </div>
         </Content>
         <Footer style={{ textAlign: "center" }}>Bill Design©2019</Footer>
