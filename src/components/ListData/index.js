@@ -59,6 +59,25 @@ export default class extends Component {
       }
     ]
   };
+
+  UpdateList = () => {
+      fetch('http://linebotme.nctu.me:8080/water/station/')
+          .then(res => res.json())
+          .then(data => {
+              // console.log(data)
+              let nData = new Array;
+              data.map((item) => {
+                  nData.push({key: item.id, name: item.name})
+              })
+              this.setState({data: nData})
+          })
+          .catch(e => console.log('错误:', e))
+  }
+
+  componentDidMount = () => {
+      this.UpdateList();
+  }
+
   render() {
     return (
       <div>
