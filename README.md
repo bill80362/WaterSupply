@@ -11,7 +11,7 @@ yarn start
 。後端使用php來接應DB
 /water
 。DB是MYSQL
-/water/config/databaee_config.php
+/water/config/database_config.php
 。權限使用Basic Auth
 auth.php處理
 目前還沒開起，後端驗證OK了，前端還沒弄
