@@ -3,6 +3,8 @@ import { DatePicker, Card, Select, Input, Form, Button } from "antd";
 const { MonthPicker, RangePicker, WeekPicker } = DatePicker;
 const Option = Select.Option;
 
+
+
 export default class extends Component {
 
     state = {
@@ -22,18 +24,18 @@ export default class extends Component {
 
       // console.log(this.state.SelectValue)
 
-      // fetch('http://linebotme.nctu.me:8080/water/money/add.php',{
-      //     method: 'post',
-      //     body:formData
-      // })
-      //     .then(res => res.json())
-      //     .then(data => {
-      //       this.setState({StationInsertResult:"新增成功"})
-      //     })
-      //     .catch(e => {
-      //         this.setState({StationInsertResult:"新增失敗"})
-      //         console.log('错误:', e)
-      //     })
+      fetch('http://linebotme.nctu.me/water/money/add.php',{
+          method: 'post',
+          body:formData
+      })
+          .then(res => res.json())
+          .then(data => {
+            this.setState({MoneyInsertResult:"新增成功"})
+          })
+          .catch(e => {
+              this.setState({MoneyInsertResult:"新增失敗"})
+              console.log('错误:', e)
+          })
 
         e.preventDefault();
     }
@@ -44,13 +46,14 @@ export default class extends Component {
         let formData  = new FormData();
         formData.append("name", e.target.name.value);
 
-        fetch('http://linebotme.nctu.me:8080/water/station/add.php',{
+        fetch('http://linebotme.nctu.me/water/station/add.php',{
             method: 'post',
             body:formData
         })
             .then(res => res.json())
             .then(data => {
                 this.setState({StationInsertResult:"新增成功"})
+                this.UpdateList() //更新站點下拉選單
             })
             .catch(e => {
                 this.setState({StationInsertResult:"新增失敗"})
@@ -65,7 +68,7 @@ export default class extends Component {
     }
     //更新下拉選單站點
     UpdateList = () => {
-        fetch('http://linebotme.nctu.me:8080/water/station/')
+        fetch('http://linebotme.nctu.me/water/station/')
             .then(res => res.json())
             .then(data => {
                 // console.log(data)

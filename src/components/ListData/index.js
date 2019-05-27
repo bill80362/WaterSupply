@@ -26,11 +26,11 @@ export default class extends Component {
         key: "action",
         render: (text, record) => (
           <span>
-            <Link to={"/ListData/" + record.key}>編輯資料</Link>
-            <Divider type="vertical" />
+            {/*<Link to={"/ListData/" + record.key}>編輯資料</Link>*/}
+            {/*<Divider type="vertical" />*/}
             <Popconfirm
               title="是否確定刪除資料?"
-              onConfirm={() => this.cancel(record.key)}
+              onConfirm={() => this.CancelItem(record.key)}
             >
               <a>刪除資料</a>
             </Popconfirm>
@@ -40,34 +40,22 @@ export default class extends Component {
     ],
     data: [
       {
-        key: "1",
-        month: "2019-05",
-        name: "大里A站",
-        money: "1138"
+        key: "等待載入中...",
+        month: "等待載入中...",
+        name: "等待載入中...",
+        money: "等待載入中..."
       },
-      {
-        key: "2",
-        month: "2019-05",
-        name: "大里A站",
-        money: "1138"
-      },
-      {
-        key: "3",
-        month: "2019-05",
-        name: "大里A站",
-        money: "1138"
-      }
     ]
   };
 
   UpdateList = () => {
-      fetch('http://linebotme.nctu.me:8080/water/station/')
+      fetch('http://linebotme.nctu.me/water/money/')
           .then(res => res.json())
           .then(data => {
-              // console.log(data)
+              console.log(data)
               let nData = new Array;
               data.map((item) => {
-                  nData.push({key: item.id, name: item.name})
+                  nData.push({key: item.id,month:item.month.substr(0,7), name: item.name,money:item.money})
               })
               this.setState({data: nData})
           })
@@ -76,6 +64,15 @@ export default class extends Component {
 
   componentDidMount = () => {
       this.UpdateList();
+  }
+
+  CancelItem = (del_id) => {
+      fetch('http://linebotme.nctu.me/water/money/del.php?id='+del_id)
+          .then(res => res.json())
+          .then(data => {
+              this.UpdateList();
+          })
+          .catch(e => console.log('错误:', e))
   }
 
   render() {

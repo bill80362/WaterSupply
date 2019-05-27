@@ -20,46 +20,54 @@ export default class extends Component {
     state = {
         data:[
             {
-                month: "01/22",
+                month: "01-22",
                 機子2號: 100,
                 機子1號: 500
             },
             {
-                month: "02/22",
+                month: "02-22",
                 機子2號: 200,
                 機子1號: 600
             },
             {
-                month: "03/22",
+                month: "03-22",
                 機子2號: 300,
-                機子1號: 700
+                機子1號: 100
             },
-            {
-                month: "04/22",
-                機子2號: 500,
-                機子1號: 900
-            },
-            {
-                month: "05/22",
-                機子2號: 800,
-                機子1號: 1100
-            },
-            {
-                month: "06/22",
-                機子2號: 600,
-                機子1號: 1100
-            },
-            {
-                month: "07/22",
-                機子2號: 700,
-                機子1號: 1200
-            },
-            {
-                month: "08/22",
-                機子2號: 100,
-                機子1號: 1000
-            },
-        ]
+        ],
+        field:["機子1號","機子2號"]
+    }
+    UpdateReport = () => {
+        //更新營收資料
+        fetch('http://linebotme.nctu.me/water/money/report2.php')
+            .then(res => res.json())
+            .then(data => {
+                // console.log(data)
+                let nData = new Array;
+                data.map((item) => {
+                    nData.push(item)
+                })
+                console.log(nData)
+                this.setState({data: nData})
+            })
+            .catch(e => console.log('错误:', e))
+        //更新站點
+        fetch('http://linebotme.nctu.me/water/station/')
+            .then(res => res.json())
+            .then(data => {
+                // console.log(data)
+                let nField = new Array;
+                data.map((item) => {
+                    nField.push(item.name)
+                })
+                console.log(nField)
+                this.setState({field: nField})
+            })
+            .catch(e => console.log('错误:', e))
+
+    }
+    componentDidMount = () => {
+        this.UpdateReport();
     }
 
     render() {
@@ -67,7 +75,7 @@ export default class extends Component {
         const dv = ds.createView().source(this.state.data);
         dv.transform({
             type: "fold",
-            fields: ["機子1號","機子2號"],
+            fields: this.state.field,
             // 展开字段集
             key: "city",
             // key字段

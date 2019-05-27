@@ -18,16 +18,34 @@ import {
 export default class extends Component {
     state = {
         data:[
-            { genre: '測試數據', sold: 500, income: 2300 },
-            { genre: '大里小強站', sold: 115, income: 667 },
-            { genre: '大里二號哥', sold: 120, income: 982 },
-            { genre: '太平一姊', sold: 350, income: 5271 },
-            { genre: '北屯嚇嚇叫', sold: 150, income: 3710 }
+            { name: '測試數據', money: 500  },
+            { name: '大里小強站', money: 115  },
+            { name: '大里二號哥', money: 120 },
+            { name: '太平一姊', money: 350 },
+            { name: '北屯嚇嚇叫', money: 150 }
         ],
         cols:{
-            sold: { alias: '營收' },
-            genre: { alias: '機子' },
+            money: { alias: '營收' },
+            name: { alias: '機子' },
         }
+    }
+    //報表
+    UpdateReport = () => {
+        fetch('http://linebotme.nctu.me/water/money/report1.php')
+            .then(res => res.json())
+            .then(data => {
+                // console.log(data)
+                let nData = new Array;
+                data.map((item) => {
+                    nData.push({name: item.name,money:parseInt(item.money)})
+                })
+                // console.log(nData)
+                this.setState({data: nData})
+            })
+            .catch(e => console.log('错误:', e))
+    }
+    componentDidMount = () => {
+        this.UpdateReport();
     }
 
     render() {
@@ -36,11 +54,11 @@ export default class extends Component {
                 <div><h1>各站營收圖表</h1></div>
                 <div style={{width:'600px',height:'500px'}}>
                     <Chart data={this.state.data} scale={this.state.cols}>
-                        <Axis name="genre" title/>
-                        <Axis name="sold" title/>
+                        <Axis name="name" title/>
+                        <Axis name="money" title/>
                         <Legend position="top" dy={-20} />
                         <Tooltip />
-                        <Geom type="interval" position="genre*sold" color="genre" />
+                        <Geom type="interval" position="name*money" color="name" />
                     </Chart>
                 </div>
             </div>
