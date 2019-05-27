@@ -5,7 +5,7 @@
 ## 安裝
 本站前後分離
 。前站 使用yarn
-yarn install
+yarn add
 yarn start
 如果 yarn run build檔案在build資料夾裡
 。後端使用php來接應DB
