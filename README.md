@@ -17,6 +17,8 @@ auth.php處理
 目前還沒開起，後端驗證OK了，前端還沒弄
 。都架好之後
 要把ajax網址設定好
+。資料庫架構
+/SQL 空的...後補
 
 ## Available Scripts   
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
