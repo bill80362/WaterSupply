@@ -12,6 +12,7 @@ export default class extends Component {
         MoneyInsertResult: "",
         SelectValue:"",
         StationList:[],
+        token: this.props.location.passwd
     }
     //新增營收
     handleInsertMoneySubmit = (e) => {
@@ -24,7 +25,7 @@ export default class extends Component {
 
       // console.log(this.state.SelectValue)
 
-      fetch('http://linebotme.nctu.me/water/money/add.php',{
+      fetch('http://linebotme.nctu.me/water/money/add.php?p='+this.state.token,{
           method: 'post',
           body:formData
       })
@@ -46,7 +47,7 @@ export default class extends Component {
         let formData  = new FormData();
         formData.append("name", e.target.name.value);
 
-        fetch('http://linebotme.nctu.me/water/station/add.php',{
+        fetch('http://linebotme.nctu.me/water/station/add.php?p='+this.state.token,{
             method: 'post',
             body:formData
         })
@@ -68,7 +69,7 @@ export default class extends Component {
     }
     //更新下拉選單站點
     UpdateList = () => {
-        fetch('http://linebotme.nctu.me/water/station/')
+        fetch('http://linebotme.nctu.me/water/station/?p='+this.state.token)
             .then(res => res.json())
             .then(data => {
                 // console.log(data)

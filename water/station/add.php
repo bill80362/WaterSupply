@@ -3,7 +3,7 @@
 include('../config/database_config.php');
 include('../config/pub_function.php');
 //Auth
-//include('../config/auth.php');
+include('../config/auth.php');
 
 if( isset($_POST['name'])){
     if($_POST['name']!=""){

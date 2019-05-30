@@ -35,11 +35,12 @@ export default class extends Component {
                 機子1號: 100
             },
         ],
-        field:["機子1號","機子2號"]
+        field:["機子1號","機子2號"],
+        token: this.props.location.passwd
     }
     UpdateReport = () => {
         //更新營收資料
-        fetch('http://linebotme.nctu.me/water/money/report2.php')
+        fetch('http://linebotme.nctu.me/water/money/report2.php?p='+this.state.token)
             .then(res => res.json())
             .then(data => {
                 // console.log(data)
@@ -47,12 +48,12 @@ export default class extends Component {
                 data.map((item) => {
                     nData.push(item)
                 })
-                console.log(nData)
+                console.log("更因營收報表2",nData)
                 this.setState({data: nData})
             })
             .catch(e => console.log('错误:', e))
         //更新站點
-        fetch('http://linebotme.nctu.me/water/station/')
+        fetch('http://linebotme.nctu.me/water/station/?p='+this.state.token)
             .then(res => res.json())
             .then(data => {
                 // console.log(data)

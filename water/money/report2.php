@@ -3,7 +3,7 @@
 include('../config/database_config.php');
 include('../config/pub_function.php');
 //Auth
-//include('../config/auth.php');
+include('../config/auth.php');
 
 $objDateTime = new DateTime();
 $ThisYear = $objDateTime->format('Y-01-01 00:00:00');
@@ -30,8 +30,9 @@ for ($i=0;$i<count($rows);$i++) {
     $month_txt = $objDateTime->format('Y-m');
     $data[$month_txt][$rows[$i]['name']] = (int)$rows[$i]['money']  ;
 }
-
+//print_r($data);
 foreach($data as $key=>$value) {
+    unset($temp);
     $temp['month'] = $key;
     foreach($value as $key2=>$value2) {
         $temp[$key2] = $value2;

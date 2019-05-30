@@ -4,6 +4,11 @@ const { MonthPicker, RangePicker, WeekPicker } = DatePicker;
 const Option = Select.Option;
 
 export default class extends Component {
+
+  state = {
+      token: this.props.location.passwd
+  }
+
   render() {
     return (
       <div>

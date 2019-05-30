@@ -45,11 +45,12 @@ export default class extends Component {
         name: "等待載入中...",
         money: "等待載入中..."
       },
-    ]
+    ],
+    token: this.props.location.passwd
   };
 
   UpdateList = () => {
-      fetch('http://linebotme.nctu.me/water/money/')
+      fetch('http://linebotme.nctu.me/water/money/?p='+this.state.token)
           .then(res => res.json())
           .then(data => {
               console.log(data)
@@ -67,7 +68,7 @@ export default class extends Component {
   }
 
   CancelItem = (del_id) => {
-      fetch('http://linebotme.nctu.me/water/money/del.php?id='+del_id)
+      fetch('http://linebotme.nctu.me/water/money/del.php?id='+del_id+'&p='+this.state.token)
           .then(res => res.json())
           .then(data => {
               this.UpdateList();
