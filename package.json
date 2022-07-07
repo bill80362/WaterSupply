@@ -9,7 +9,7 @@
     "antv": "^0.2.2",
     "base-64": "^0.1.0",
     "bizcharts": "^3.5.3-beta.0",
-    "moment": "^2.24.0",
+    "moment": "^2.29.4",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-month-picker": "^1.3.9",
